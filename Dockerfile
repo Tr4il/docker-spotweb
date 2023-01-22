@@ -1,5 +1,6 @@
 FROM alpine:3.17
-LABEL maintainer "Erik de Vries <docker@erikdevries.nl>"
+LABEL org.opencontainers.image.authors="Tr4il - forked from Erik de Vries <docker@erikdevries.nl>"
+LABEL org.opencontainers.image.version="002ee2dd5f5dafce53dc8336a2c87638fd5293ef"
 
 # Disable timeout for starting services to make "wait for sql" work
 ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
@@ -45,7 +46,7 @@ RUN apk -U update && \
         mariadb-connector-c \
         s6-overlay \
     && \
-    git clone --depth=1 https://github.com/spotweb/spotweb.git /app
+    git clone --depth=1 -b develop https://github.com/spotweb/spotweb.git /app
 
 RUN echo "*/5       *       *       *       *       run-parts /etc/periodic/5min" >> /etc/crontabs/root
 
