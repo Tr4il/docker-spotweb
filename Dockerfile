@@ -1,6 +1,6 @@
 FROM alpine:3.19
 LABEL org.opencontainers.image.authors="Tr4il - forked from Erik de Vries <docker@erikdevries.nl>"
-LABEL org.opencontainers.image.version="5e35e28fc43717d692f263a45684b473b7870d26"
+LABEL org.opencontainers.image.version="219a974c7cfa76055ff085ab8f5f7ed97abc235c"
 
 # Disable timeout for starting services to make "wait for sql" work
 ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
@@ -44,6 +44,7 @@ RUN apk -U update && \
         php83-ctype \
         php83-opcache \
         php83-session \
+        php83-intl \
         mysql-client \
         mariadb-connector-c \
         s6-overlay \
