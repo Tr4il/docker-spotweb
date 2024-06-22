@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.20
 LABEL org.opencontainers.image.authors="Tr4il - forked from Erik de Vries <docker@erikdevries.nl>"
 LABEL org.opencontainers.image.version="219a974c7cfa76055ff085ab8f5f7ed97abc235c"
 
