@@ -5,12 +5,17 @@ LABEL org.opencontainers.image.version="b9749849cc2a3dbcd78c2f87f08f9a55835cadc6
 # Disable timeout for starting services to make "wait for sql" work
 ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
 ENV TZ=Europe/Amsterdam
+ENV DB_ENGINE=pdo_mysql
+ENV DB_HOST=mysql
+ENV DB_PORT=3306
+ENV DB_NAME=spotweb
+ENV DB_USER=spotweb
+ENV DB_PASS=spotweb
 # Default 5 minute interval configuration for Spotweb update cronjob
 ENV CRON_INTERVAL="*/5 * * * *"
 
-RUN apk -U update && \
-    apk -U upgrade && \
-    apk -U add --no-cache \
+RUN apk --no-cache upgrade && \
+    apk --no-cache add \
         bash \
         coreutils \
         ca-certificates \
@@ -32,12 +37,9 @@ RUN apk -U update && \
         php84-zlib \
         php84-gd \
         php84-openssl \
-        php84-mysqli \
         php84-pdo \
         php84-pdo_mysql \
-        php84-pgsql \
         php84-pdo_pgsql \
-        php84-sqlite3 \
         php84-pdo_sqlite \
         php84-json \
         php84-mbstring \
@@ -45,11 +47,17 @@ RUN apk -U update && \
         php84-opcache \
         php84-session \
         php84-intl \
-        mysql-client \
-        mariadb-connector-c \
         s6-overlay \
     && \
-    git clone --depth=1 -b develop https://github.com/spotweb/spotweb.git /app
+    # Symlink php84 to php
+    ln -sf /usr/bin/php84 /usr/bin/php \
+    && \
+    # Symlink php-fpm84 to php-fpm
+    ln -sf /usr/sbin/php-fpm84 /usr/sbin/php-fpm \
+    && \
+    git clone --depth=1 https://github.com/spotweb/spotweb.git /app \
+    && \
+    rm -rf /app/.git
 
 # Configure Spotweb
 COPY ./conf/spotweb /app
