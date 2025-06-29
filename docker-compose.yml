@@ -1,4 +1,3 @@
-version: '3'
 services:
   spotweb:
     image: erikdevries/spotweb
