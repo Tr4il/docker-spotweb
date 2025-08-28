@@ -63,7 +63,7 @@ RUN apk --no-cache upgrade && \
 COPY ./conf/spotweb /app
 
 # Copy root filesystem
-COPY rootfs /
+COPY --chmod=+x rootfs /
 
 # create default user / group and folders
 RUN groupadd -g 1000 abc && \
