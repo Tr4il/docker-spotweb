@@ -1,6 +1,6 @@
 FROM alpine:3.22
 LABEL org.opencontainers.image.authors="Tr4il - forked from Erik de Vries <docker@erikdevries.nl>"
-LABEL org.opencontainers.image.version="9d7b4439ba1831075be34637768519954c2c43b6"
+LABEL org.opencontainers.image.version="02ce4a02647ec0458661696e38d924d54d5ca1fb"
 
 # Disable timeout for starting services to make "wait for sql" work
 ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
